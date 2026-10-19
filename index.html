@@ -65,16 +65,380 @@
         .glow-heart {
             animation: neon-pulse 2s infinite ease-in-out;
         }
+        .letter-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: rgba(20, 3, 16, 0.68);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .letter-overlay[hidden] {
+            display: none;
+        }
+        .letter-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .letter-card {
+            width: min(100%, 440px);
+            padding: 2.25rem 2rem 1.75rem;
+            border: 1px solid rgba(255, 213, 227, 0.9);
+            border-radius: 1.5rem;
+            background: linear-gradient(145deg, #fffaf4, #ffe3ec);
+            box-shadow: 0 18px 70px rgba(255, 20, 100, 0.35);
+            color: #76233d;
+            text-align: center;
+            transform: translateY(18px) scale(0.96);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .letter-overlay.is-open .letter-card {
+            transform: translateY(0) scale(1);
+        }
+        .letter-close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.85rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(197, 55, 94, 0.1);
+            color: #9d2448;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .letter-dismiss {
+            margin-top: 1.5rem;
+            padding: 0.65rem 1.5rem;
+            border: 0;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #f06b8d, #d83263);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .letter-trigger {
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 0;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #e84471, #b92255);
+            color: white;
+            font-size: 1.15rem;
+            cursor: pointer;
+            box-shadow: 0 0 16px rgba(255, 20, 100, 0.32);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .letter-trigger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px rgba(255, 20, 100, 0.58);
+        }
+        .letter-trigger:focus-visible,
+        .letter-close:focus-visible,
+        .letter-dismiss:focus-visible {
+            outline: 2px solid #a8204a;
+            outline-offset: 3px;
+        }
+        .hold-screen {
+            transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.85s ease;
+            gap: 0.75rem;
+            padding: 1.25rem;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.8) 0 12px, transparent 14px),
+                radial-gradient(circle at 84% 24%, rgba(255, 255, 255, 0.7) 0 18px, transparent 20px),
+                radial-gradient(circle at 18% 78%, rgba(255, 255, 255, 0.65) 0 24px, transparent 26px),
+                radial-gradient(circle at 90% 82%, rgba(255, 255, 255, 0.65) 0 14px, transparent 16px),
+                linear-gradient(145deg, #ffd3e0, #f7a9c2 55%, #ffc4d3);
+        }
+        .greeting-card {
+            position: relative;
+            width: min(88vw, 520px);
+            height: min(60vh, 470px);
+            min-height: 330px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 16px 24px rgba(154, 28, 57, 0.24));
+        }
+        .greeting-card-heart {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .greeting-card-copy {
+            position: relative;
+            z-index: 1;
+            width: 74%;
+            margin-top: -0.5rem;
+            color: #fffaf5;
+            text-shadow: 0 2px 3px rgba(113, 23, 35, 0.55);
+        }
+        .greeting-card-script {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.25rem, 5vw, 2rem);
+            line-height: 1.3;
+        }
+        .greeting-card-title {
+            margin-top: 0.5rem;
+            font-size: clamp(1.1rem, 5vw, 2rem);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: 0.02em;
+        }
+        .greeting-card-date {
+            margin-top: 0.5rem;
+            font-size: clamp(3rem, 15vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1;
+        }
+        .greeting-rose {
+            position: absolute;
+            z-index: 2;
+            font-size: clamp(2.5rem, 10vw, 4rem);
+            filter: drop-shadow(0 4px 5px rgba(100, 20, 35, 0.22));
+            pointer-events: none;
+        }
+        .greeting-rose-top {
+            top: 1%;
+            right: 21%;
+        }
+        .greeting-rose-left {
+            top: 45%;
+            left: 2%;
+        }
+        .greeting-rose-bottom {
+            right: 13%;
+            bottom: 9%;
+        }
+        .hold-heart {
+            width: 4.25rem;
+            height: 4.25rem;
+            color: #e9235d;
+            filter: drop-shadow(0 0 10px rgba(226, 31, 88, 0.4));
+        }
+        .hold-screen[hidden] {
+            display: none;
+        }
+        .hold-screen.is-open {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .hold-heart {
+            touch-action: none;
+        }
+        .hold-heart i {
+            transition: transform 0.2s ease;
+            font-size: 2.5rem;
+        }
+        .hold-screen.is-holding .hold-heart i {
+            transform: scale(1.14);
+        }
+        .hold-progress {
+            width: 0;
+            transition: width 1.3s linear;
+        }
+        .hold-screen.is-holding .hold-progress {
+            width: 100%;
+        }
+        .hold-screen:not(.is-holding) .hold-progress {
+            transition-duration: 0.15s;
+        }
+        .star-transition {
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            overflow: hidden;
+            background:
+                radial-gradient(1px 1px at 15% 25%, rgba(255, 255, 255, 0.85) 50%, transparent 100%),
+                radial-gradient(1px 1px at 75% 68%, rgba(255, 210, 240, 0.75) 50%, transparent 100%),
+                radial-gradient(2px 2px at 42% 82%, rgba(255, 255, 255, 0.7) 50%, transparent 100%),
+                radial-gradient(ellipse at center, #111b42, #02030f 85%);
+            background-size: 180px 160px, 230px 210px, 290px 240px, 100% 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.9s ease;
+        }
+        .star-transition[hidden] {
+            display: none;
+        }
+        .star-transition.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .star-transition.is-leaving {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .meteor-field {
+            position: absolute;
+            inset: 0;
+            transition: opacity 0.8s ease;
+        }
+        .star-transition.is-message .meteor-field {
+            opacity: 0;
+        }
+        .star-transition.is-message .transition-meteor {
+            animation-play-state: paused;
+        }
+        .transition-message {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: #fff4fb;
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            line-height: 1.5;
+            text-align: center;
+            text-shadow: 0 0 12px #ff1493, 0 0 32px rgba(255, 20, 147, 0.9);
+            opacity: 0;
+            transform: translateY(16px) scale(0.96);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .star-transition.is-message .transition-message {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .star-transition.is-continuing .transition-message {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.98);
+        }
+        .transition-continue {
+            position: absolute;
+            left: 50%;
+            bottom: max(2rem, 8vh);
+            padding: 0.8rem 1.8rem;
+            border: 1px solid rgba(255, 220, 240, 0.8);
+            border-radius: 999px;
+            background: linear-gradient(135deg, #ff4f9a, #d91669);
+            box-shadow: 0 0 22px rgba(255, 20, 147, 0.6);
+            color: #fff;
+            font: 700 1rem 'Quicksand', sans-serif;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .star-transition.is-typed .transition-continue {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+        .star-transition.is-continuing .transition-continue {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 10px);
+        }
+        .transition-continue:hover {
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.9);
+        }
+        .transition-continue:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 4px;
+        }
+        .transition-meteor {
+            position: absolute;
+            left: var(--meteor-x);
+            top: var(--meteor-y);
+            width: var(--meteor-length);
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 105, 180, 0.6) 55%, #fff 100%);
+            box-shadow: 0 0 12px 2px rgba(255, 20, 147, 0.95);
+            opacity: 0;
+            transform: rotate(var(--meteor-angle));
+            transform-origin: right center;
+            animation: meteor-shoot var(--meteor-duration) linear var(--meteor-delay) infinite;
+        }
+        .transition-meteor::after {
+            content: "";
+            position: absolute;
+            right: -2px;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 12px 4px #ff1493;
+            transform: translateY(-50%);
+        }
+        @keyframes meteor-shoot {
+            0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(var(--meteor-angle)); }
+            10% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; transform: translate3d(var(--meteor-travel-x), var(--meteor-travel-y), 0) rotate(var(--meteor-angle)); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .transition-meteor {
+                animation: meteor-shoot 1.8s linear 0s 1 both;
+            }
+            .star-transition {
+                transition-duration: 0.01ms;
+            }
+            .meteor-field,
+            .transition-message {
+                transition-duration: 0.01ms;
+            }
+            .hold-screen {
+                transition-duration: 0.01ms;
+            }
+        }
     </style>
 </head>
 <body class="text-pink-100 relative h-screen w-screen overflow-hidden">
 
+    <main id="hold-screen" class="hold-screen absolute inset-0 z-20 flex flex-col items-center justify-center text-center">
+        <article class="greeting-card" aria-label="Thiệp chúc mừng ngày Phụ nữ Việt Nam 20 tháng 10">
+            <svg class="greeting-card-heart" viewBox="0 0 600 540" aria-hidden="true">
+                <defs>
+                    <linearGradient id="card-heart-fill" x1="0" y1="0" x2="0.9" y2="1">
+                        <stop offset="0" stop-color="#fa746f"/>
+                        <stop offset="1" stop-color="#df394b"/>
+                    </linearGradient>
+                </defs>
+                <path d="M300 510 C250 472 48 333 48 174 C48 84 112 34 190 34 C240 34 282 61 300 101 C318 61 360 34 410 34 C488 34 552 84 552 174 C552 333 350 472 300 510Z" fill="url(#card-heart-fill)" stroke="#fff0d8" stroke-width="5"/>
+                <path d="M300 496 C245 454 63 325 63 175 C63 95 120 51 190 51 C237 51 276 78 294 119 L300 132 L306 119 C324 78 363 51 410 51 C480 51 537 95 537 175 C537 325 355 454 300 496Z" fill="none" stroke="rgba(255,245,220,0.6)" stroke-width="2"/>
+            </svg>
+            <div class="greeting-card-copy">
+                <p class="greeting-card-script">Chúc mừng ngày</p>
+                <h1 class="greeting-card-title">PHỤ NỮ VIỆT NAM</h1>
+                <p class="greeting-card-date">20/10</p>
+            </div>
+            <span class="greeting-rose greeting-rose-top" aria-hidden="true">🌹</span>
+            <span class="greeting-rose greeting-rose-left" aria-hidden="true">🌹</span>
+            <span class="greeting-rose greeting-rose-bottom" aria-hidden="true">🌹</span>
+        </article>
+        <button id="hold-heart" type="button" aria-label="Nhấn giữ trái tim để mở" aria-describedby="hold-instruction" class="hold-heart relative z-10 flex items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-700">
+            <i class="fa-solid fa-heart glow-heart"></i>
+        </button>
+        <div class="relative z-10 w-56 text-rose-950">
+            <p id="hold-instruction" class="text-sm font-bold">Nhấn giữ trái tim để mở</p>
+            <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-white/60">
+                <div class="hold-progress h-full rounded-full bg-rose-600"></div>
+            </div>
+        </div>
+    </main>
+    <div id="star-transition" class="star-transition" aria-hidden="true" hidden></div>
+
     <!-- Header UI Minimal -->
     <header class="absolute top-4 left-4 right-4 z-10 flex justify-between items-center pointer-events-none">
         <div class="glass-card px-4 py-2.5 rounded-2xl pointer-events-auto flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-600 via-pink-500 to-purple-600 flex items-center justify-center text-xl text-white shadow-lg shadow-pink-500/40 glow-heart">
-                <i class="fa-solid fa-heart"></i>
-            </div>
+            <button id="btn-letter" class="letter-trigger flex items-center justify-center" type="button" aria-label="Mở thư gửi vợ yêu" title="Mở thư">
+                <i class="fa-solid fa-envelope"></i>
+            </button>
             <!-- <div>
                 <h1 class="font-pacifico text-lg md:text-xl text-pink-200 tracking-wide">LoveLoom 3D</h1>
                 <p class="text-[11px] text-pink-300/80 font-medium">Bầu Trời Chữ Neon Tình Yêu</p>
@@ -89,27 +453,38 @@
         </div>
     </header>
 
-    <audio id="bg-music" autoplay loop src="audio/music.mp3"></audio>
+    <div id="letter-overlay" class="letter-overlay" hidden>
+        <section class="letter-card relative" role="dialog" aria-modal="true" aria-labelledby="letter-title" aria-describedby="letter-message">
+            <button id="btn-close-letter" class="letter-close" type="button" aria-label="Đóng thư">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="mb-3 text-4xl text-rose-500"><i class="fa-solid fa-envelope-open-text"></i></div>
+            <h2 id="letter-title" class="font-pacifico text-3xl text-rose-700">Gửi em - người thương của anh</h2>
+            <div id="letter-message" class="mt-4 space-y-4 text-base leading-relaxed">
+                <p>Nhân ngày 20/10, anh chỉ mong em luôn bình yên, rạng rỡ và cười thật tươi mỗi ngày. Cảm ơn em đã đến và biến thế giới của anh trở nên trọn vẹn.</p>
+                <p>Dù chặng đường phía trước có ra sao, hứa với anh là mình sẽ mãi bên nhau và cùng nhau già đi em nhé!</p>
+                <p><em>Yêu em thật nhiều!</em></p>
+            </div>
+            <button id="btn-dismiss-letter" class="letter-dismiss" type="button">Đóng thư</button>
+        </section>
+    </div>
+
+    <audio id="bg-music" loop src="audio/music.mp3"></audio>
 
     <div id="canvas-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
 
     <script>
-        // const PHRASES = [
-        //     "I LOVE YOU 💖",
-        //     "ANH YÊU EM 🥰",
-        //     "MÃI BÊN NHAU 💖",
-        //     "CÙNG NHAU GIÀ ĐI 💍",
-        //     "EM LÀ THẾ GIỚI CỦA ANH 🌍",
-        //     "MÃI YÊU EM ✨"
-        // ];
+
 
         const PHRASES = [
-            "I💖",
-            "L🥰",
-            "O💖",
-            "V💍",
-            "E🌍",
-            "U✨"
+            "CHÚC EM 20/10 RẠNG RỠ 🌸",
+            "LUÔN VUI VẺ & HẠNH PHÚC 🥰",
+            "CƯỜI THẬT TƯƠI MỖI NGÀY ✨",
+            "EM LÀ THẾ GIỚI CỦA ANH 🌍",
+            "MÃI BÊN NHAU NGHỆNH PHONG 💖",
+            "CÙNG NHAU GIÀ ĐI 💍",
+            "MÃI YÊU EM ✨",
+            "I LOVE YOU 💖"
         ];
 
         const TEXT_COLORS = [
@@ -137,7 +512,7 @@
         const minCameraDistance = 8;
         const maxCameraDistance = 45;
         // Number of text sprites to spawn initially
-        let so_luong = 300;
+        let so_luong = 250;
 
         function createNeonTextSprite(textStr) {
             const canvas = document.createElement('canvas');
@@ -337,6 +712,32 @@
             const bgMusic = document.getElementById('bg-music');
             const btnMusic = document.getElementById('btn-music');
             const musicIcon = document.getElementById('music-icon');
+            const letterOverlay = document.getElementById('letter-overlay');
+            const letterTrigger = document.getElementById('btn-letter');
+            const closeLetterButton = document.getElementById('btn-close-letter');
+            const dismissLetterButton = document.getElementById('btn-dismiss-letter');
+
+            const closeLetter = () => {
+                letterOverlay.classList.remove('is-open');
+                window.setTimeout(() => {
+                    letterOverlay.hidden = true;
+                    letterTrigger.focus();
+                }, 300);
+            };
+
+            letterTrigger.addEventListener('click', () => {
+                letterOverlay.hidden = false;
+                requestAnimationFrame(() => letterOverlay.classList.add('is-open'));
+                closeLetterButton.focus();
+            });
+            closeLetterButton.addEventListener('click', closeLetter);
+            dismissLetterButton.addEventListener('click', closeLetter);
+            letterOverlay.addEventListener('click', event => {
+                if (event.target === letterOverlay) closeLetter();
+            });
+            letterOverlay.addEventListener('keydown', event => {
+                if (event.key === 'Escape') closeLetter();
+            });
 
             const updateMusicButton = () => {
                 const isMusicPlaying = !bgMusic.paused;
@@ -348,9 +749,6 @@
 
             bgMusic.addEventListener('play', updateMusicButton);
             bgMusic.addEventListener('pause', updateMusicButton);
-            bgMusic.play().catch(error => {
-                console.warn("Không thể tự phát nhạc; trình duyệt có thể yêu cầu thao tác của người dùng.", error);
-            });
 
             btnMusic.addEventListener('click', () => {
                 if (bgMusic.paused) {
@@ -361,6 +759,145 @@
                     bgMusic.pause();
                 }
             });
+        }
+
+        function setupHoldToEnter() {
+            const holdScreen = document.getElementById('hold-screen');
+            const holdButton = document.getElementById('hold-heart');
+            const starTransition = document.getElementById('star-transition');
+            const holdDuration = 1300;
+            let holdTimer = null;
+            let isHolding = false;
+            let isOpen = false;
+
+            const showStarTransition = () => {
+                const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                const fadeDuration = reducedMotion ? 0 : 2000;
+                const meteorDuration = 4200;
+                const messageText = 'Chúc vợ yêu ngày 20/10 vui vẻ, hạnh phúc và luôn cười thật tươi! Cảm ơn em vì đã luôn là mảnh ghép tuyệt vời nhất trong cuộc đời anh.';
+                const messageCharacters = Array.from(messageText);
+                const typingInterval = reducedMotion ? 0 : 1000;
+                const fragment = document.createDocumentFragment();
+
+                for (let i = 0; i < 80; i++) {
+                    const meteor = document.createElement('span');
+                    meteor.className = 'transition-meteor';
+                    meteor.style.setProperty('--meteor-x', `${Math.random() * 95}%`);
+                    meteor.style.setProperty('--meteor-y', `${Math.random() * 90}%`);
+                    meteor.style.setProperty('--meteor-length', `${120 + Math.random() * 180}px`);
+                    const duration = 2 + Math.random() * 1.5;
+                    meteor.style.setProperty('--meteor-delay', `-${Math.random() * duration}s`);
+                    meteor.style.setProperty('--meteor-duration', `${duration}s`);
+                    meteor.style.setProperty('--meteor-angle', `${25 + Math.random() * 25}deg`);
+                    meteor.style.setProperty('--meteor-travel-x', `${35 + Math.random() * 35}vw`);
+                    meteor.style.setProperty('--meteor-travel-y', `${30 + Math.random() * 40}vh`);
+                    fragment.appendChild(meteor);
+                }
+
+                const meteorField = document.createElement('div');
+                meteorField.className = 'meteor-field';
+                meteorField.appendChild(fragment);
+
+                const message = document.createElement('p');
+                message.className = 'transition-message';
+                const continueButton = document.createElement('button');
+                continueButton.className = 'transition-continue';
+                continueButton.type = 'button';
+                continueButton.textContent = 'Tiếp tục';
+
+                starTransition.replaceChildren(meteorField, message, continueButton);
+                starTransition.hidden = false;
+                requestAnimationFrame(() => {
+                    starTransition.classList.add('is-visible');
+                });
+
+                window.setTimeout(() => {
+                    holdScreen.classList.add('is-open');
+                    window.setTimeout(() => {
+                        holdScreen.hidden = true;
+                    }, fadeDuration);
+                }, fadeDuration);
+
+                window.setTimeout(() => {
+                    starTransition.classList.add('is-message');
+                    let characterIndex = 0;
+                    const typeNextCharacter = () => {
+                        if (characterIndex >= messageCharacters.length) {
+                            starTransition.classList.add('is-typed');
+                            continueButton.focus({ preventScroll: true });
+                            return;
+                        }
+                        message.textContent += messageCharacters[characterIndex];
+                        characterIndex += 1;
+                        window.setTimeout(typeNextCharacter, typingInterval);
+                    };
+                    typeNextCharacter();
+                }, meteorDuration);
+
+                continueButton.addEventListener('click', () => {
+                    const bgMusic = document.getElementById('bg-music');
+                    bgMusic.play().catch(error => {
+                        console.warn("Không thể tự phát nhạc; hãy bật nhạc bằng nút điều khiển.", error);
+                    });
+
+                    window.setTimeout(() => {
+                        starTransition.classList.remove('is-visible');
+                        starTransition.classList.add('is-leaving');
+                        window.setTimeout(() => {
+                            starTransition.hidden = true;
+                            starTransition.classList.remove('is-leaving');
+                            starTransition.classList.remove('is-message');
+                            starTransition.classList.remove('is-typed');
+                            starTransition.classList.remove('is-continuing');
+                            starTransition.replaceChildren();
+                        }, fadeDuration);
+                    }, reducedMotion ? 0 : 2000);
+                    starTransition.classList.add('is-continuing');
+                }, { once: true });
+            };
+
+            const startHold = () => {
+                if (isOpen || isHolding) return;
+
+                isHolding = true;
+                holdScreen.classList.add('is-holding');
+                holdTimer = window.setTimeout(() => {
+                    isOpen = true;
+                    isHolding = false;
+                    holdScreen.classList.remove('is-holding');
+                    if (typeof navigator.vibrate === 'function') {
+                        navigator.vibrate([40, 60, 40]);
+                    }
+                    showStarTransition();
+
+                }, holdDuration);
+            };
+
+            const cancelHold = () => {
+                if (!isHolding) return;
+
+                isHolding = false;
+                window.clearTimeout(holdTimer);
+                holdScreen.classList.remove('is-holding');
+            };
+
+            holdButton.addEventListener('pointerdown', event => {
+                event.preventDefault();
+                holdButton.setPointerCapture(event.pointerId);
+                startHold();
+            });
+            holdButton.addEventListener('pointerup', cancelHold);
+            holdButton.addEventListener('pointercancel', cancelHold);
+            holdButton.addEventListener('lostpointercapture', cancelHold);
+            holdButton.addEventListener('keydown', event => {
+                if (event.key !== ' ' && event.key !== 'Enter') return;
+                event.preventDefault();
+                if (!event.repeat) startHold();
+            });
+            holdButton.addEventListener('keyup', event => {
+                if (event.key === ' ' || event.key === 'Enter') cancelHold();
+            });
+            window.addEventListener('blur', cancelHold);
         }
 
         function onPointerMove(e) {
@@ -570,6 +1107,7 @@
 
         window.onload = function() {
             init();
+            setupHoldToEnter();
             animate();
         };
     </script>
